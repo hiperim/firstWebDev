@@ -1499,28 +1499,42 @@ body {
     justify-content: center;
 }
 
+/* General transition for smooth scaling */
 .homepage-inner {
-    text-align: center;
-    color: white;
-    transform: scale(1);
-    will-change: transform;
-    transition: all 0.3s ease;
-    padding: 2vw; /* Use viewport-relative padding */
-    max-width: 90vw; /* Limit maximum width */
-    z-index: 2;
+  transition: all 0.3s ease;
+  max-width: 90vw;
+  padding: 2vw;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  transform: scale(1);
 }
 
+/* Default styles for large screens */
 .homepage-inner h1 {
-    font-size: var(--font-size-4xl);
-    margin-bottom: var(--space-16);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-purple)
+  font-size: clamp(2rem, 6vw, 4rem);
+  margin-bottom: var(--space-16, 16px);
+  font-weight: var(--font-weight-bold, 600);
+  color: var(--color-purple);
+  word-wrap: break-word;
 }
 
 .homepage-inner p {
-    font-size: var(--font-size-lg);
-    margin-bottom: var(--space-24);
-    opacity: 0.9;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  margin-bottom: var(--space-24, 24px);
+  opacity: 0.9;
+}
+
+.homepage-inner .btn {
+  padding: 1.5vh 3vw;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  border-radius: var(--radius-base, 8px);
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 /* Button styling for homepage */
@@ -1528,7 +1542,8 @@ body {
     background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.3);
     color: white;
-    padding: var(--space-12) var(--space-24);
+    padding: 1.5vh 3vw;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
     border-radius: var(--radius-base);
     font-weight: var(--font-weight-medium);
     transition: all 0.3s ease;
@@ -1536,91 +1551,48 @@ body {
     display: inline-block;
 }
 
-.homepage-inner .btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-2px);
+/* Responsive scaling for mobile landscape mode */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  .homepage-inner {
+    transform: scale(0.55);
+    padding: 1vh 1.5vw;
+  }
+
+  .homepage-inner h1 {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    margin-bottom: 0.8vh;
+  }
+
+  .homepage-inner p {
+    font-size: clamp(0.8rem, 1.8vw, 1rem);
+    margin-bottom: 1vh;
+  }
+
+  .homepage-inner .btn {
+    padding: 1vh 2vw;
+    font-size: clamp(0.75rem, 1.8vw, 0.95rem);
+  }
 }
 
-/* Performance optimizations - GPU acceleration */
-.fabric-panel,
-.zipper-slider,
-.homepage-content {
-    backface-visibility: hidden;
-    perspective: 1000px;
-    transform: translateZ(0);
-}
+/* Extra small landscape screens, e.g., Samsung A55 in landscape */
+@media screen and (orientation: landscape) and (max-width: 900px) and (max-height: 450px) {
+  .homepage-inner {
+    transform: scale(0.45);
+    padding: 0.5vh 1vw;
+  }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .zipper-slider {
-        width: 35px;
-        height: 50px;
-    }
-    
-    .homepage-inner h1 {
-        font-size: var(--font-size-3xl);
-    }
-    
-    .homepage-inner p {
-        font-size: var(--font-size-md);
-    }
-    
-    .tooth {
-        width: 6px;
-        height: 10px;
-    }
-}
+  .homepage-inner h1 {
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    margin-bottom: 0.5vh;
+  }
 
-@media (orientation: landscape) {
-    .homepage-inner {
-        transform: scale(0.85);
-        padding: 1.5vw;
-    }
-    
-    .homepage-inner h1 {
-        font-size: clamp(1.5rem, 4vw, 2.5rem);
-        margin-bottom: 1.5vh;
-    }
-    
-    .homepage-inner p {
-        font-size: clamp(1rem, 2vw, 1.2rem);
-    }
-    
-    .homepage-inner .btn {
-        padding: 1.5vh 3vw;
-        font-size: clamp(0.9rem, 2vw, 1.1rem);
-    }
-    
-    /* Adjust zipper teeth for landscape */
-    .zipper-teeth {
-        height: 100vh;
-    }
-    
-    /* Fix viewport height issues on mobile landscape */
-    @media (max-height: 500px) {
-        .homepage-inner {
-            transform: scale(0.75);
-            padding: 1vw;
-        }
-        
-        .homepage-inner h1 {
-            font-size: clamp(1.2rem, 3.5vw, 2rem);
-        }
-    }
-}
+  .homepage-inner p {
+    font-size: clamp(0.7rem, 1.6vw, 0.9rem);
+    margin-bottom: 0.8vh;
+  }
 
-/* Add dynamic font scaling */
-.homepage-inner h1 {
-    font-size: clamp(2rem, 6vw, 4rem);
-    line-height: 1.2;
-    word-wrap: break-word;
-    max-width: 90vw;
-}
-
-.homepage-inner .btn {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 80vw;
+  .homepage-inner .btn {
+    padding: 0.8vh 1.5vw;
+    font-size: clamp(0.65rem, 1.4vw, 0.8rem);
+  }
 }
