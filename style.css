@@ -1504,7 +1504,9 @@ body {
     color: white;
     transform: scale(1);
     will-change: transform;
-    transition: transform 2s ease-out;
+    transition: all 0.3s ease;
+    padding: 2vw; /* Use viewport-relative padding */
+    max-width: 90vw; /* Limit maximum width */
     z-index: 2;
 }
 
@@ -1568,4 +1570,57 @@ body {
         width: 6px;
         height: 10px;
     }
+}
+
+@media (orientation: landscape) {
+    .homepage-inner {
+        transform: scale(0.85);
+        padding: 1.5vw;
+    }
+    
+    .homepage-inner h1 {
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        margin-bottom: 1.5vh;
+    }
+    
+    .homepage-inner p {
+        font-size: clamp(1rem, 2vw, 1.2rem);
+    }
+    
+    .homepage-inner .btn {
+        padding: 1.5vh 3vw;
+        font-size: clamp(0.9rem, 2vw, 1.1rem);
+    }
+    
+    /* Adjust zipper teeth for landscape */
+    .zipper-teeth {
+        height: 100vh;
+    }
+    
+    /* Fix viewport height issues on mobile landscape */
+    @media (max-height: 500px) {
+        .homepage-inner {
+            transform: scale(0.75);
+            padding: 1vw;
+        }
+        
+        .homepage-inner h1 {
+            font-size: clamp(1.2rem, 3.5vw, 2rem);
+        }
+    }
+}
+
+/* Add dynamic font scaling */
+.homepage-inner h1 {
+    font-size: clamp(2rem, 6vw, 4rem);
+    line-height: 1.2;
+    word-wrap: break-word;
+    max-width: 90vw;
+}
+
+.homepage-inner .btn {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80vw;
 }

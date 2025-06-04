@@ -50,6 +50,7 @@ class ZipperAnimation {
     }
     
     generateTeeth() {
+        const isLandscape = window.matchMedia("(orientation: landscape)").matches;
         const container = this.elements.zipperTeeth;
         // Fix: Use document height or viewport height more reliably
         const actualHeight = Math.max(
@@ -57,8 +58,11 @@ class ZipperAnimation {
             window.innerHeight,
             document.body.scrollHeight
         );
+         // Use window.screen instead of innerHeight for mobile accuracy
+        const viewportHeight = isLandscape ? window.screen.width : window.screen.height;
+        const teethSpacing = isLandscape ? 18 : 15;
         
-        const teethCount = Math.floor(actualHeight / 15) + 5; // Add extra teeth as buffer
+        const teethCount = Math.floor(viewportHeight / teethSpacing) + 5; // Add extra teeth as buffer
         container.innerHTML = '';
         this.teeth = [];
 
@@ -317,3 +321,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+// resize/orientation handler
+let landscapeWarningShown = false;
+window.addEventListener('resize', () => {
+    const isLandscape = window.matchMedia("(orientation: landscape)").matches;
+    
+    if (isLandscape && !landscapeWarningShown) {
+        console.log('Landscape mode activated - applying compact layout');
+        landscapeWarningShown = true;
+    }
+    
+    if (window.zipperAnimation && !window.zipperAnimation.isAnimating) {
+        window.zipperAnimation.generateTeeth();
+    }
+}, true);
