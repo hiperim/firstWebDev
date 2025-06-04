@@ -1,1 +1,1 @@
-My first webDev attempt
+Zipper animation when entering a website
