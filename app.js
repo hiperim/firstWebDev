@@ -7,6 +7,8 @@ class ZipperAnimation {
         this.zoomFadeDuration = 2000; // 2 seconds for zoom and fade
         this.elements = {};
         this.teeth = [];
+        this.archPoints = [];
+        this.lastSliderY = 0;
         
         this.init();
     }
