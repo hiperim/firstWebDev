@@ -158,7 +158,7 @@ class ZipperAnimation {
     updateSliderPosition(progress) {
         // Steps 2-3: Slider descends from top to bottom
         const windowHeight = window.innerHeight;
-        const sliderHeight = 60;
+        
         const effectiveHeight = window.visualViewport?.height || window.innerHeight;
         const maxY = effectiveHeight - 60; // 60px slider height
         const currentY = -30 + (progress * maxY);
