@@ -51,34 +51,37 @@ class ZipperAnimation {
     
     generateTeeth() {
         const container = this.elements.zipperTeeth;
-        const teethCount = Math.floor(window.innerHeight / 15);
+        // Fix: Use document height or viewport height more reliably
+        const actualHeight = Math.max(
+            document.documentElement.clientHeight,
+            window.innerHeight,
+            document.body.scrollHeight
+        );
         
+        const teethCount = Math.floor(actualHeight / 15) + 5; // Add extra teeth as buffer
         container.innerHTML = '';
         this.teeth = [];
-        
+
         for (let i = 0; i < teethCount; i++) {
             const leftTooth = document.createElement('div');
             const rightTooth = document.createElement('div');
-            
             leftTooth.className = 'tooth tooth-left';
             rightTooth.className = 'tooth tooth-right';
-            
             leftTooth.style.top = `${i * 15}px`;
             rightTooth.style.top = `${i * 15}px`;
-            
-            // Store reference for animation
+
             this.teeth.push({
                 left: leftTooth,
                 right: rightTooth,
                 position: i * 15,
                 opened: false
             });
-            
+
             container.appendChild(leftTooth);
             container.appendChild(rightTooth);
         }
         
-        console.log(`Generated ${teethCount * 2} teeth`);
+        console.log(`Generated ${teethCount * 2} teeth for height: ${actualHeight}px`);
     }
     
     setupInitialState() {
