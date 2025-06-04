@@ -159,11 +159,12 @@ class ZipperAnimation {
         // Steps 2-3: Slider descends from top to bottom
         const windowHeight = window.innerHeight;
         const sliderHeight = 60;
-        const maxY = windowHeight - sliderHeight + 30; // Account for initial offset
+        const effectiveHeight = window.visualViewport?.height || window.innerHeight;
+        const maxY = effectiveHeight - 60; // 60px slider height
         const currentY = -30 + (progress * maxY);
         
         // Move from top torTop
-        this.elements.zipperSlider.style.top = `${currentY}px`;
+        this.elements.zipperSlider.style.top = `${-30 + (progress * maxY)}px`;
         
         console.log(`Step ${progress < 0.5 ? '2' : '3'}: Slider at ${Math.round(progress * 100)}% descent`);
     }
@@ -336,3 +337,11 @@ window.addEventListener('resize', () => {
         window.zipperAnimation.generateTeeth();
     }
 }, true);
+
+const updateViewport = () => {
+  const vh = window.visualViewport?.height || window.innerHeight;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+};
+
+window.visualViewport.addEventListener('resize', updateViewport);
+window.addEventListener('orientationchange', updateViewport);
