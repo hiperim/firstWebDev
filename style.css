@@ -1329,8 +1329,7 @@ body {
 #zipper-container {
     position: relative;
     width: 100vw;
-    height: calc(var(--vh, 1vh) * 100);
-    min-height: 100%;
+    height: 100vh;
     overflow: hidden;
     background: #ec420f; /* Orange background underneath */
     will-change: transform;
