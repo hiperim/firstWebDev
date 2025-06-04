@@ -20,6 +20,7 @@
   --color-info: rgba(98, 108, 113, 1);
   --color-focus-ring: rgba(33, 128, 141, 0.4);
   --color-select-caret: rgba(19, 52, 59, 0.8);
+  --color-purple: #300730;
 
   /* Common style patterns */
   --focus-ring: 0 0 0 3px var(--color-focus-ring);
@@ -1511,6 +1512,7 @@ body {
     font-size: var(--font-size-4xl);
     margin-bottom: var(--space-16);
     font-weight: var(--font-weight-bold);
+    color: var(--color-purple)
 }
 
 .homepage-inner p {
@@ -1523,6 +1525,7 @@ body {
 .homepage-inner .btn {
     background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
     padding: var(--space-12) var(--space-24);
     border-radius: var(--radius-base);
     font-weight: var(--font-weight-medium);
