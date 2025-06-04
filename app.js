@@ -168,7 +168,7 @@ class ZipperAnimation {
         const sliderCenterX = 50; // Percentage - slider is centered at 50%
         const sliderTopY = ((currentSliderY) / windowHeight) * 100; // Convert to percentage
         
-        const currentVWidth = (progress * 25);
+        const currentVWidth = (progress * 50);
         
         // Make V-point converge exactly at slider's Top-center
         const leftClipPath = `polygon(
@@ -198,7 +198,7 @@ class ZipperAnimation {
         const currentSliderPosition = progress * windowHeight;
         
         
-        const centerGapWidth = progress * 140; 
+        const centerGapWidth = progress * 250; 
         
         this.teeth.forEach((tooth, index) => {
             if (currentSliderPosition >= tooth.position) {
@@ -210,8 +210,8 @@ class ZipperAnimation {
                 // Convert to pixels 
                 const pixelDisplacement = (localGapWidth / 100) * window.innerWidth * 0.20;
                 
-                tooth.left.style.transform = `skew(-30deg) translateX(-${pixelDisplacement}px)`;
-                tooth.right.style.transform = `skew(30deg) translateX(${pixelDisplacement}px)`;
+                tooth.left.style.transform = `translateX(-${pixelDisplacement}px)`;
+                tooth.right.style.transform = `translateX(${pixelDisplacement}px)`;
                 
                 tooth.left.classList.add('opened-teeth-left');
                 tooth.right.classList.add('opened-teeth-right');

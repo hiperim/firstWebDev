@@ -1416,7 +1416,7 @@ body {
     transform: translateX(8px) skew(15deg) !important;
 }
 
-/* zipper slider - starts at top and moves DOWN */
+/* zipper slider - starts at top and moves down */
 .zipper-slider {
     position: absolute;
     left: 50%;
@@ -1473,18 +1473,6 @@ body {
     0 2px 4px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
   position: relative;
-}
-
-/* Linha central simples como na imagem */
-.slider-pull::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 16px;
-  height: 1px;
-  background: rgba(0, 0, 0, 0.3);
-  transform: translate(-50%, -50%);
 }
 
 /* Homepage content - orange background revealed underneath */
