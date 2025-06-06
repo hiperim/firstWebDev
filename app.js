@@ -39,7 +39,7 @@ class ZipperAnimation {
         // Generate teeth
         this.generateTeeth();
         
-        // Setup initial state (Step 1)
+        // Setup initial state
         this.setupInitialState();
         
         // Start animation after delay
@@ -52,17 +52,17 @@ class ZipperAnimation {
     generateTeeth() {
         const isLandscape = window.matchMedia("(orientation: landscape)").matches;
         const container = this.elements.zipperTeeth;
-        // Fix: Use document height or viewport height more reliably
+        // DOcument height
         const actualHeight = Math.max(
             document.documentElement.clientHeight,
             window.innerHeight,
             document.body.scrollHeight
         );
-         // Use window.screen instead of innerHeight for mobile accuracy
+         // Use window.screen for better mobile accuracy (innerHeight before)
         const viewportHeight = isLandscape ? window.screen.width : window.screen.height;
         const teethSpacing = isLandscape ? 18 : 15;
         
-        const teethCount = Math.floor(viewportHeight / teethSpacing) + 5; // Add extra teeth as buffer
+        const teethCount = Math.floor(viewportHeight / teethSpacing) + 5; // Buffer-teeth lol - Add extra teeth
         container.innerHTML = '';
         this.teeth = [];
 
@@ -89,11 +89,11 @@ class ZipperAnimation {
     }
     
     setupInitialState() {
-        // Step 1: Completely closed zipper, white background covering entire viewport
+        // Closed zipper, white background covering viewport
         this.elements.fabricLeft.style.clipPath = 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)';
         this.elements.fabricRight.style.clipPath = 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)';                       
         
-        // Position slider at TOP (correcting the direction)
+        // Position slider at top
         this.elements.zipperSlider.style.top = '-30px';
         this.elements.zipperSlider.style.bottom = 'auto';
         this.elements.zipperSlider.style.left = '50%';
@@ -124,10 +124,10 @@ class ZipperAnimation {
             const totalProgress = Math.min(elapsed / this.animationDuration, 1);
             
             if (elapsed < this.zipperDuration) {
-                // Steps 2-4: Zipper opening phase
+                // Zipper opening
                 const zipperProgress = elapsed / this.zipperDuration;
                 
-                // Update slider position (moving from top torTop)
+                // Update slider position (moving from top to bottom)
                 this.updateSliderPosition(zipperProgress);
                 
                 // Update fabric opening with progressive V pattern
@@ -140,7 +140,7 @@ class ZipperAnimation {
                 this.updateContentVisibility(zipperProgress);
                 
             } else {
-                // Steps 5-6: Zoom and fade phase
+                // Zoom and fade
                 const zoomProgress = (elapsed - this.zipperDuration) / this.zoomFadeDuration;
                 this.updateZoomAndFade(zoomProgress);
             }
@@ -162,7 +162,7 @@ class ZipperAnimation {
         const maxY = windowHeight - sliderHeight + 30; // Account for initial offset
         const currentY = -30 + (progress * maxY);
         
-        // Move from top torTop
+        // Move from top
         this.elements.zipperSlider.style.top = `${currentY}px`;
         
         console.log(`Step ${progress < 0.5 ? '2' : '3'}: Slider at ${Math.round(progress * 100)}% descent`);
@@ -174,12 +174,12 @@ class ZipperAnimation {
         const currentSliderY = -30 + (progress * (windowHeight - sliderHeight + 30));
         
         // Get slider's exact center position
-        const sliderCenterX = 50; // Percentage - slider is centered at 50%
+        const sliderCenterX = 50; // Slider is centered at 50%
         const sliderTopY = ((currentSliderY) / windowHeight) * 100; // Convert to percentage
         
         const currentVWidth = (progress * 44);
         
-        // Make V-point converge exactly at slider's Top-center
+        // Make V-point converge at slider's top-center
         const leftClipPath = `polygon(
             0% 100%,
             100% 100%,
@@ -231,10 +231,9 @@ class ZipperAnimation {
 
     updateContentVisibility(progress) {
         // Start showing content earlier and more gradually
-        if (progress > 0.05) { // Start at 5% instead of 10%
+        if (progress > 0.05) {
             const contentProgress = Math.min((progress - 0.05) / 0.95, 1);
             this.elements.homepageContent.style.opacity = contentProgress.toString();
-            // Remove the rotateX transformation that was hiding content
             this.elements.homepageContent.style.transform = `scale(${0.8 + (contentProgress * 0.2)})`;
         }
     }
@@ -310,11 +309,10 @@ document.addEventListener('DOMContentLoaded', function() {
     refreshButton.addEventListener('click', function(event) {
       event.preventDefault();
       
-      // Opcional: adicionar feedback visual antes do refresh
       refreshButton.textContent = 'Recarregando...';
       refreshButton.disabled = true;
       
-      // Pequeno delay para mostrar o feedback
+      // Small delay to allow UI update
       setTimeout(() => {
         location.reload();
       }, 200);
