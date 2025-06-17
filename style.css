@@ -539,7 +539,6 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    background: #ec420f; /* Orange background underneath */
     will-change: transform;
 }
 
