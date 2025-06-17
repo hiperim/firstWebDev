@@ -530,7 +530,7 @@ body {
     font-family: var(--font-family-base);
     overflow: hidden;
     height: 100vh;
-    background: #ec420f; /* Orange background as specified */
+    background: #ffffff; /* Original orange: #ec420f */
 }
 
 /* Main zipper container */
@@ -539,7 +539,7 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    background: #ec420f; /* Orange background underneath */
+    background: #ffffff; /* Orange background underneath */
     will-change: transform;
 }
 
